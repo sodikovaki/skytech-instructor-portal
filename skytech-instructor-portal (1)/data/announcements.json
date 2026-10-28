@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2026-10-28",
+    "title": "Welcome to the instructor portal",
+    "from": "SkyTech office",
+    "pinned": true,
+    "priority": "normal",
+    "body": "This is where new forms and office announcements will be posted. Check it before each class week.\n\nForms marked New were added in the last two weeks. Use the Lock button if you're on a shared computer."
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Course deck, binders and curriculum are posted",
+    "from": "SkyTech office",
+    "pinned": false,
+    "priority": "normal",
+    "body": "The SPRAT L1–L3 course deck (v22), the current Level 1, 2 and 3 binders, the Days 1–4 training program, the curriculum and the mechanical advantage binder are in Forms. Teach from these versions; the old Day 1–4 deck is retired.\n\nUse the search bar at the top to find any topic inside them. Results jump straight to the right page.\n\nThese are SkyTech training materials. Don't forward them outside the instructor team."
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Class dates through March",
+    "from": "SkyTech office",
+    "pinned": false,
+    "priority": "normal",
+    "body": "December: Dec 8–13 and Dec 15–20, 8 AM–4 PM. Five training days (the December special adds one) plus the evaluation day on Sunday.\n\nNo classes Dec 21 through Jan 3. From January, classes are five days, 8 AM–5 PM, most weeks Monday–Friday. Jan 12–16 and Jan 26–30 run Tuesday–Saturday. Last class on the calendar is Mar 22–26.\n\nEach class is capped at 8 students. These dates match the booking calendar on skytechacademy.org."
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Day-One signing happens in person",
+    "from": "SkyTech office",
+    "pinned": false,
+    "priority": "safety",
+    "body": "The liability release, SPRAT affidavit, SPRAT privacy acknowledgment and physical condition certification are signed in person on the morning of Day 1, not at registration. Nobody goes on rope until all four are signed and filed."
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Rescue courses are on hold",
+    "from": "SkyTech office",
+    "pinned": false,
+    "priority": "normal",
+    "body": "We are not offering Confined Space Rescue or Advanced Complicated Rescue for now. If a student asks, take their name and contact info for the interest list."
+  }
+]
