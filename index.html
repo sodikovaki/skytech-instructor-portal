@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SkyTech Portal</title>
+  <link rel="icon" href="assets/badge.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Passcode gate -->
+  <main id="gate" class="gate">
+    <form id="gate-form" class="gate-card">
+      <img src="assets/badge.png" alt="SkyTech Academy" class="gate-logo">
+      <h1>SkyTech portal</h1>
+      <p>Instructors use the instructor passcode. Office staff use the office passcode to also open SkyTech files.</p>
+      <label for="passcode">Passcode</label>
+      <input id="passcode" type="password" required autofocus autocomplete="current-password">
+      <label class="remember"><input id="remember" type="checkbox"> Keep me signed in on this device</label>
+      <p id="gate-error" class="gate-error" role="alert" hidden>That passcode didn't match. Ask the SkyTech office for the current one.</p>
+      <button type="submit">Open portal</button>
+    </form>
+  </main>
+
+  <!-- Portal -->
+  <div id="app" hidden>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <img src="assets/badge.png" alt="SkyTech Academy" class="topbar-logo">
+        <span class="topbar-title" id="role-title">Instructor portal</span>
+        <button id="lock" class="lock" type="button">Lock</button>
+        <button id="menu-open" class="menu-btn" type="button" aria-controls="nav" aria-expanded="false">Menu</button>
+      </div>
+    </header>
+
+    <section class="nextclass">
+      <div class="wrap nextclass-inner" id="nextclass"></div>
+    </section>
+
+    <section class="finder" role="search">
+      <div class="wrap">
+        <label for="q" class="finder-label">Search every binder, form and lesson plan</label>
+        <form id="finder-form" class="finder-row" autocomplete="off">
+          <input id="q" type="search" enterkeyhint="search" placeholder="Try: anchor, Z-rig, edge protection">
+          <button id="q-go" type="submit" class="finder-go">Search</button>
+          <button id="q-clear" type="button" class="finder-clear" hidden>Clear</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="wrap shell">
+      <main id="view" class="view" aria-live="polite"></main>
+
+      <div id="scrim" class="scrim" hidden></div>
+      <nav id="nav" class="nav" aria-label="Portal sections">
+        <div class="nav-head">
+          <span>Sections</span>
+          <button id="menu-close" class="menu-close" type="button">Close</button>
+        </div>
+        <div id="nav-groups"></div>
+      </nav>
+    </div>
+
+    <footer class="foot wrap">
+      <span>SkyTech Academy, 20140 Holzwarth Rd, Unit 414, Spring, TX 77388</span>
+      <a href="mailto:info@skytechacademy.org">info@skytechacademy.org</a>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

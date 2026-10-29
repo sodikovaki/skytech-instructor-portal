@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "kdf": "PBKDF2-SHA256",
+  "iterations": 600000,
+  "salt": "OmSWXD2amcDJUkOd5uIJYg==",
+  "roles": {
+    "instructors": {
+      "instructors": "oT3qMqAwxlILnqjxksmLCTBrcmFwRe886GOr3ufkPX3+gOjuphU+UKH8NKws8LyCadIDr7RPetj27iew"
+    },
+    "office": {
+      "instructors": "ll2E7YM1nQQ3/JN2I225UUnmCiQmJIbbbj16HoWd9qS5BaGcpgj94p6e0HJtqfQlEOgBcxVzyxggaCqn",
+      "office": "q5YzRN6XFS4jklNUTiALc3qzl25krw/0D2FATX3thW0/Ddqo3dOYav7T12e95Yyh38wPJlkyPN0CZgqF"
+    }
+  }
+}
