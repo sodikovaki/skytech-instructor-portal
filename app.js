@@ -195,6 +195,20 @@ $("#lock").addEventListener("click", () => {
 })();
 
 // ---------- opening encrypted files ----------
+// Encrypted files normally sit directly in vault/. Some were uploaded into subfolders,
+// so look there too before giving up.
+const VAULT_DIRS = ["vault", "vault/SkyTech_Vault_Fix_1of3", "vault/SkyTech_Vault_Fix_2of3", "vault/SkyTech_Vault_Fix_3of3"];
+async function getVaultBytes(id) {
+  let lastErr = null;
+  for (const dir of VAULT_DIRS) {
+    try {
+      return await getBytes(`${dir}/${id}.bin`);
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  throw lastErr;
+}
 function fileLink(f, label, opts = {}) {
   const v = opts.alt ? f.altVault : f.vault;
   const href = opts.alt ? f.alt : f.file;
@@ -217,7 +231,7 @@ document.addEventListener("click", async (e) => {
   if (win) win.document.write(`<title>${esc(meta.name)}</title><p style="font:16px system-ui;padding:24px;color:#5B6779">Opening ${esc(meta.name)}…</p>`);
   a.classList.add("opening");
   try {
-    const plain = await decrypt(state.keys[meta.role], await getBytes(`vault/${meta.id}.bin`));
+    const plain = await decrypt(state.keys[meta.role], await getVaultBytes(meta.id));
     const url = URL.createObjectURL(new Blob([plain], { type: meta.mime }));
     if (win) {
       win.location.href = url + (a.dataset.page ? `#page=${a.dataset.page}` : "");
