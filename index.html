@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 
@@ -73,6 +73,14 @@
   </div>
 
   <div id="toast" class="toast" role="status" hidden></div>
-  <script src="app.js"></script>
+  <div id="filebar" class="filebar" role="dialog" aria-label="File ready" hidden>
+    <span class="filebar-label">Ready: <strong id="filebar-name"></strong></span>
+    <span class="filebar-actions">
+      <a id="filebar-open" class="filebar-btn primary-btn" href="#" target="_blank" rel="noopener">Open</a>
+      <a id="filebar-download" class="filebar-btn" href="#">Download</a>
+      <button id="filebar-close" class="filebar-btn" type="button">Close</button>
+    </span>
+  </div>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

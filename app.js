@@ -219,6 +219,23 @@ function fileLink(f, label, opts = {}) {
   return `<span class="form-name">${label}</span>`;
 }
 
+// Phones and tablets often can't open a decrypted file in a new tab on their own,
+// so there the file is offered as Open / Download buttons the person taps.
+const TOUCH = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
+function showFileBar(name, url, page) {
+  const bar = $("#filebar");
+  $("#filebar-name").textContent = name;
+  const open = $("#filebar-open");
+  open.href = url + (page ? `#page=${page}` : "");
+  const dl = $("#filebar-download");
+  dl.href = url;
+  dl.download = name;
+  bar.hidden = false;
+  open.focus();
+}
+$("#filebar-close").addEventListener("click", () => ($("#filebar").hidden = true));
+
 document.addEventListener("click", async (e) => {
   const a = e.target.closest("a[data-vault]");
   if (!a) return;
@@ -226,27 +243,37 @@ document.addEventListener("click", async (e) => {
   const meta = state.vault[a.dataset.vault];
   if (!meta) return;
   const viewable = /^(application\/pdf|image\/)/.test(meta.mime) && !a.hasAttribute("data-download");
-  // Open the tab right away, while the browser still counts this as a click.
-  const win = viewable ? window.open("", "_blank") : null;
-  if (win) win.document.write(`<title>${esc(meta.name)}</title><p style="font:16px system-ui;padding:24px;color:#5B6779">Opening ${esc(meta.name)}…</p>`);
+  // On a computer, open the tab right away while the browser still counts this as a click.
+  let win = viewable && !TOUCH ? window.open("", "_blank") : null;
+  if (win) {
+    try {
+      win.document.write(`<title>${esc(meta.name)}</title><p style="font:16px system-ui;padding:24px;color:#5B6779">Opening ${esc(meta.name)}…</p>`);
+    } catch {
+      win = null;
+    }
+  }
   a.classList.add("opening");
+  toast(`Unlocking ${meta.name}…`);
   try {
     const plain = await decrypt(state.keys[meta.role], await getVaultBytes(meta.id));
     const url = URL.createObjectURL(new Blob([plain], { type: meta.mime }));
-    if (win) {
+    $("#toast").hidden = true;
+    if (win && !win.closed) {
       win.location.href = url + (a.dataset.page ? `#page=${a.dataset.page}` : "");
-    } else {
+    } else if (!viewable && !TOUCH) {
       const dl = document.createElement("a");
       dl.href = url;
       dl.download = meta.name;
       document.body.append(dl);
       dl.click();
       dl.remove();
+    } else {
+      showFileBar(meta.name, url, a.dataset.page);
     }
-    setTimeout(() => URL.revokeObjectURL(url), 10 * 60 * 1000);
+    setTimeout(() => URL.revokeObjectURL(url), 30 * 60 * 1000);
   } catch (err) {
     if (win) win.close();
-    toast(`Couldn't open ${meta.name}. Check your connection and try again.`);
+    toast(`Couldn't open ${meta.name} (${err.message}). Refresh the page and try again.`);
   } finally {
     a.classList.remove("opening");
   }
